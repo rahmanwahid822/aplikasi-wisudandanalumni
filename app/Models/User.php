@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Models;
-
+use App\Models\Datayudisium;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -16,9 +16,6 @@ class User extends Authenticatable
      *
      * @var array
      */
-    // protected $fillable = [
-    //     'name', 'email', 'password', 'username'
-    // ];
         protected $guarded = ['id'];
     /**
      * The attributes that should be hidden for arrays.
@@ -28,6 +25,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function datayudisium()
+    {
+        return $this->hasMany(Datayudisium::class);
+    }
 
     /**
      * The attributes that should be cast to native types.

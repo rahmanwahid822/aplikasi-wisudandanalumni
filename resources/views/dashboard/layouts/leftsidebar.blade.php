@@ -35,8 +35,8 @@
                             <span>Home</span>
                         </a>
                     </li>
-                    <li class=" {{  Request::is('dashboard/isiyudisium')?'active':''}}">
-                        <a href="dashboard/isiyudisium">
+                    <li class=" {{  Request::is('dashboard/datayudisium')?'active':''}}">
+                        <a href="dashboard/datayudisium">
                             <i class="material-icons">assignment</i>
                             <span>Daftar Yudisium</span>
                         </a>
