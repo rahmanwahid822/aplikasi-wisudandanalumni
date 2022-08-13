@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Models;
+<<<<<<< HEAD
 use App\Models\Datawisuda;
+=======
+>>>>>>> 838d85f56c3c2d18410342f6bc99162718c6d261
 use App\Models\Datayudisium;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -29,12 +32,16 @@ class User extends Authenticatable
 
     public function datayudisium()
     {
+<<<<<<< HEAD
         return $this->hasOne(Datayudisium::class);
     }
 
     public function datawisuda()
     {
         return $this->hasOne(Datawisuda::class);
+=======
+        return $this->hasMany(Datayudisium::class);
+>>>>>>> 838d85f56c3c2d18410342f6bc99162718c6d261
     }
 
     /**

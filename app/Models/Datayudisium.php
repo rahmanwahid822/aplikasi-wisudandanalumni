@@ -13,6 +13,7 @@ class Datayudisium extends Model
 
     protected $guarded = ['id'];
 
+<<<<<<< HEAD
     protected $fillable = [
         'user_id',
         'bukti_perpus',
@@ -30,4 +31,10 @@ class Datayudisium extends Model
     {
         return $this->belongsTo(User::class);
     }
+=======
+    public function user()
+   {
+    return $this->belongsTo(User::class);
+   }
+>>>>>>> 838d85f56c3c2d18410342f6bc99162718c6d261
 }

@@ -11,6 +11,11 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DatawisudaController;
 use App\Http\Controllers\IsiyudisiumController;
 use App\Http\Controllers\DatayudisiumController;
+<<<<<<< HEAD
+=======
+use App\Models\User;
+use App\Models\Datayudisium;
+>>>>>>> 838d85f56c3c2d18410342f6bc99162718c6d261
 
 
 
@@ -29,11 +34,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+<<<<<<< HEAD
 Route::get('/dashboard/bukualumni', function (){
     return view('dashboard.bukualumni',[
         "judul" => "Buku Alumni"
     ]);
 });
+=======
+
+>>>>>>> 838d85f56c3c2d18410342f6bc99162718c6d261
 
 Route::get('/dashboard/tracerstudy', function(){
     return view ('dashboard.tracerstudy',[
@@ -76,6 +85,17 @@ Route::put('/dashboard/daftarwisuda/{id}/update', [App\Http\Controllers\Datawisu
 //     ]);
 // });
 
+<<<<<<< HEAD
+=======
+// Route::get('/dashboard/datayudisium', function(User $user) {
+//     return view('dashboard.datayudisium',[
+//         'judul'=>'Data Yudisium',
+//         'data' => $user->datayudisium,
+//     ]);
+// });
+
+Route::get('/dashboard/datayudisium',[DatayudisiumController::class, 'index'])->middleware('auth');
+>>>>>>> 838d85f56c3c2d18410342f6bc99162718c6d261
 
 Route::get('/dashboard/profil',[ProfilController::class, 'index'])->middleware('auth');
 

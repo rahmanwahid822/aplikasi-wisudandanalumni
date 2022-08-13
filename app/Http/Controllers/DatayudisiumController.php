@@ -7,6 +7,7 @@ use App\Models\Datayudisium;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
+
 class DatayudisiumController extends Controller
 {
     public function index()
@@ -89,3 +90,4 @@ class DatayudisiumController extends Controller
             ->with('success', 'Data berhasil diunggah');
     }
 }
+      
