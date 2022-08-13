@@ -26,7 +26,7 @@
                                                 <i class="material-icons">person_add</i>
                                             </div>
                                             <div class="menu-info">
-                                                <h4>Data Wisuda Belum Lengkap</h4>
+                                                <h4>{{ auth()->user()->nama }}</h4>
                                                 <p>
                                                     <i class="material-icons">access_time</i> 14 mins ago
                                                 </p>

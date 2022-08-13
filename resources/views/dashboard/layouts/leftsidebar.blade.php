@@ -35,16 +35,28 @@
                             <span>Home</span>
                         </a>
                     </li>
-                    <li class=" {{  Request::is('dashboard/isiyudisium')?'active':''}}">
-                        <a href="dashboard/isiyudisium">
+                    <li class=" {{  Request::is('dashboard/datayudisium')?'active':''}}">
+                        <a href="dashboard/datayudisium">
                             <i class="material-icons">assignment</i>
                             <span>Daftar Yudisium</span>
                         </a>
                     </li>
-                    <li class=" {{  Request::is('dashboard/daftarwisuda')?'active':''}}">
-                        <a href="dashboard/daftarwisuda">
+                    <li class=" {{  Request::is('dashboard/datawisuda')?'active':''}}">
+                        <a href="dashboard/datawisuda">
                             <i class="material-icons">school</i>
                             <span>Daftar Wisuda</span>
+                        </a>
+                    </li>
+                    <li class=" {{  Request::is('dashboard/bukualumni')?'active':''}}">
+                        <a href="dashboard/bukualumni">
+                            <i class="material-icons">collections_bookmark</i>
+                            <span>Buku Kenangan Alumni</span>
+                        </a>
+                    </li>
+                    <li class=" {{  Request::is('dashboard/tracerstudy')?'active':''}}">
+                        <a href="dashboard/tracerstudy">
+                            <i class="material-icons">work</i>
+                            <span>Tracer Study</span>
                         </a>
                     </li>
                   
