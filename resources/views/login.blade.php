@@ -73,30 +73,14 @@
 						</div>
 						<form action="/login" method="post">
 							@csrf
-							<div class="select-role">
-								<!-- <div class="btn-group btn-group-toggle" data-toggle="buttons">
-									<label class="btn active">
-										<input type="radio" name="options" id="admin">
-										<div class="icon"><img src="aset-login/vendors/images/briefcase.svg" class="svg" alt=""></div>
-										<span>I'm</span>
-										Wisudawan
-									</label>
-									<label class="btn">
-										<input type="radio" name="options" id="user">
-										<div class="icon"><img src="aset-login/vendors/images/person.svg" class="svg" alt=""></div>
-										<span>I'm</span>
-										Alumni
-									</label>
-								</div> -->
-							</div>
 							<div class="input-group custom">
-								<input type="text" class="form-control form-control-lg @error('username') is-invalid @enderror" placeholder="Username" name="username"  id="username" autofocus required>
+								<input type="text" class="form-control form-control-lg @error('nim') is-invalid @enderror" placeholder="nim" name="nim"  id="nim" autofocus required>
 								<div class="input-group-append custom">
 									<span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
 								</div>
-								@error('username')
-									<divc class="invalid-feedback"> 
-										Masukan Username Dengan Benar
+								@error('nim')
+									<div class="invalid-feedback"> 
+										Masukan NIM Dengan Benar
 									</div>
 								@enderror
 							</div>

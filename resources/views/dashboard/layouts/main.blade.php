@@ -31,11 +31,12 @@
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="aset-dashboard/css/themes/all-themes.css" rel="stylesheet" />
+    @yield('css')
 </head>
 
 <body class="theme-pink">
     <!-- Page Loader -->
-    <div class="page-loader-wrapper">
+    {{-- <div class="page-loader-wrapper">
         <div class="loader">
             <div class="preloader">
                 <div class="spinner-layer pl-red">
@@ -49,7 +50,7 @@
             </div>
             <p>Please wait...</p>
         </div>
-    </div>
+    </div> --}}
     <!-- #END# Page Loader -->
     <!-- Overlay For Sidebars -->
     <div class="overlay"></div>
@@ -118,6 +119,9 @@
     <!-- Demo Js -->
     <script src="aset-dashboard/js/demo.js"></script>
     <script src="aset-dashboard/js/pages/examples/profile.js"></script>
-</body>
+
+    @yield('js')
+    
+    </body>
 
 </html>

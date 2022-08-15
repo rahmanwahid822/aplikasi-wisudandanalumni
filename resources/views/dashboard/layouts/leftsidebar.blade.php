@@ -4,7 +4,7 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="aset-dashboard/images/user.png" width="48" height="48" alt="User" />
+                    <img src="upload/profil_img/{{ auth()->user()->foto }}" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ auth()->user()->nama }}</div>
@@ -12,7 +12,7 @@
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="dashboard/profil"><i class="material-icons">person</i>Profile</a></li>
+                            <li><a href="/profil"><i class="material-icons">person</i>Profile</a></li>
                             <li role="separator" class="divider"></li>
                             <li role="separator" class="divider"></li>
                             <li>
@@ -35,26 +35,26 @@
                             <span>Home</span>
                         </a>
                     </li>
-                    <li class=" {{  Request::is('dashboard/datayudisium')?'active':''}}">
-                        <a href="dashboard/datayudisium">
+                    <li class=" {{  Request::is('yudisium')?'active':''}}">
+                        <a href="/yudisium">
                             <i class="material-icons">assignment</i>
                             <span>Daftar Yudisium</span>
                         </a>
                     </li>
-                    <li class=" {{  Request::is('dashboard/datawisuda')?'active':''}}">
-                        <a href="dashboard/datawisuda">
+                    <li class=" {{  Request::is('wisuda')?'active':''}}">
+                        <a href="/wisuda">
                             <i class="material-icons">school</i>
                             <span>Daftar Wisuda</span>
                         </a>
                     </li>
-                    <li class=" {{  Request::is('dashboard/bukualumni')?'active':''}}">
-                        <a href="dashboard/bukualumni">
+                    <li class=" {{  Request::is('bukualumni')?'active':''}}">
+                        <a href="/bukualumni">
                             <i class="material-icons">collections_bookmark</i>
                             <span>Buku Kenangan Alumni</span>
                         </a>
                     </li>
-                    <li class=" {{  Request::is('dashboard/tracerstudy')?'active':''}}">
-                        <a href="dashboard/tracerstudy">
+                    <li class=" {{  Request::is('tracerstudy')?'active':''}}">
+                        <a href="/tracerstudy">
                             <i class="material-icons">work</i>
                             <span>Tracer Study</span>
                         </a>
@@ -64,8 +64,8 @@
                     
                     
                     <li class="header">SETTING</li>
-                    <li class=" {{  Request::is('dashboard/profil')?'active':''}}">
-                        <a href="dashboard/profil">
+                    <li class=" {{  Request::is('/profil')?'active':''}}">
+                        <a href="/profil">
                             <i class="material-icons">person</i>
                             <span>Profil</span>
                         </a>

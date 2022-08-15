@@ -1,7 +1,11 @@
 @extends('dashboard.layouts.main')
 
 @section('isikonten')
-
+@if (Session::get('success'))
+    <div class="alert alert-success">
+        {{ \Session::get('success') }}
+    </div>
+@endif
 <div class="container-fluid">
             <div class="block-header">
                 <h2>{{ $judul }}</h2>
@@ -13,12 +17,12 @@
                         <div class="profile-header">&nbsp;</div>
                         <div class="profile-body">
                             <div class="image-area">
-                                <img src="aset-dashboard/images/user-lg.jpg" alt="AdminBSB - Profile Image" />
+                                <img src="upload/profil_img/{{ $data[0]->foto }}" alt="AdminBSB - Profile Image" width="250px" />
                             </div>
                             <div class="content-area">
                              @foreach ($data as $isi)
                                 <h3>{{ $isi->nama }}</h3>
-                                <p>{{ $isi->prodi }}</p>
+                                <p>{{ $isi->prodi }} ({{ $isi->angkatan }})</p>
                                 <p>{{$isi->nim}}</p>
 
                                 <p>{{$isi->email}}</p>
@@ -60,121 +64,8 @@
                                 </ul>
 
                                 <div class="tab-content">
-                                    <!-- <div role="tabpanel" class="tab-pane fade in active" id="home">
-                                        <div class="panel panel-default panel-post">
-                                            <div class="panel-heading">
-                                                <div class="media">
-                                                    <div class="media-left">
-                                                        <a href="#">
-                                                            <img src="aset-login/images/user-lg.jpg" />
-                                                        </a>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <h4 class="media-heading">
-                                                            <a href="#">Marc K. Hammond</a>
-                                                        </h4>
-                                                        Shared publicly - 26 Oct 2018
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel-body">
-                                                <div class="post">
-                                                    <div class="post-heading">
-                                                        <p>I am a very simple wall post. I am good at containing <a href="#">#small</a> bits of <a href="#">#information</a>. I require little more information to use effectively.</p>
-                                                    </div>
-                                                    <div class="post-content">
-                                                        <img src="../../images/profile-post-image.jpg" class="img-responsive" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel-footer">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#">
-                                                            <i class="material-icons">thumb_up</i>
-                                                            <span>12 Likes</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <i class="material-icons">comment</i>
-                                                            <span>5 Comments</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <i class="material-icons">share</i>
-                                                            <span>Share</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-
-                                                <div class="form-group">
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control" placeholder="Type a comment" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="panel panel-default panel-post">
-                                            <div class="panel-heading">
-                                                <div class="media">
-                                                    <div class="media-left">
-                                                        <a href="#">
-                                                            <img src="../../images/user-lg.jpg" />
-                                                        </a>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <h4 class="media-heading">
-                                                            <a href="#">Marc K. Hammond</a>
-                                                        </h4>
-                                                        Shared publicly - 01 Oct 2018
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel-body">
-                                                <div class="post">
-                                                    <div class="post-heading">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                                    </div>
-                                                    <div class="post-content">
-                                                        <iframe width="100%" height="360" src="https://www.youtube.com/embed/10r9ozshGVE" frameborder="0" allowfullscreen=""></iframe>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel-footer">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#">
-                                                            <i class="material-icons">thumb_up</i>
-                                                            <span>125 Likes</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <i class="material-icons">comment</i>
-                                                            <span>8 Comments</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <i class="material-icons">share</i>
-                                                            <span>Share</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-
-                                                <div class="form-group">
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control" placeholder="Type a comment" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                     <div role="tabpanel" class="tab-pane fade in active" id="profile_settings">
-                                        <form class="form-horizontal">
+                                        {{-- <form class="form-horizontal">
                                             @foreach($data as $isi)
                                             <div class="form-group">
                                                 <label for="Nama" class="col-sm-2 control-label">Nama </label>
@@ -205,7 +96,7 @@
                                                 <label for="tempatlahir" class="col-sm-2 control-label">Tempat Lahir</label>
                                                 <div class="col-sm-10">
                                                     <div class="form-line">
-                                                        <label > {{ $isi->tempatlahir }}</label>
+                                                        <label > {{ $isi->tmp_lahir }}</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -213,7 +104,7 @@
                                                 <label for="tanggallahir" class="col-sm-2 control-label">Tanggal Lahir</label>
                                                 <div class="col-sm-10">
                                                     <div class="form-line">
-                                                        <label > {{ $isi->tanggallahir }}</label>
+                                                        <label > {{ $isi->tgl_lahir }}</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -221,7 +112,7 @@
                                                 <label for="alamat" class="col-sm-2 control-label">Alamat</label>
                                                 <div class="col-sm-10">
                                                     <div class="form-line">
-                                                        <label > JL. KH HASAN GENGGONG GG B BAYUSARI 8</label>
+                                                        <label > {{ $isi->alamat }}</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -229,15 +120,15 @@
                                                 <label for="jeniskelamin" class="col-sm-2 control-label">Jenis Kelamin</label>
                                                 <div class="col-sm-10">
                                                     <div class="form-line">
-                                                        <label > {{ $isi->jeniskelamin}}</label>
+                                                        <label > {{ $isi->jns_kelamin}}</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="jeniskelamin" class="col-sm-2 control-label">Email</label>
+                                                <label for="jeniskelamin" class="col-sm-2 control-label">Ayah / Ibu</label>
                                                 <div class="col-sm-10">
                                                     <div class="form-line">
-                                                        <label > {{ $isi->email}}</label>
+                                                        <label > {{ $isi->ayah}} / {{ $isi->ibu }}</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -250,6 +141,113 @@
                                                 </div>
                                             </div>
                                           @endforeach
+                                        </form> --}}
+                                        <form class="form-horizontal" action="/profile/{{ auth()->user()->id }}" method="POST"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            @method('PUT')
+                                            @foreach($data as $isi)
+                                            <div class="form-group">
+                                                <label for="Nama" class="col-sm-2 control-label">Nama </label>
+                                                <div class="col-sm-10">
+                                                    <div class="form-line">
+                                                        <input type="text" class="form-control" value  ="{{ $isi->nama }}" name="nama" id="nama" >
+                                                       
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="nim" class="col-sm-2 control-label">NIM</label>
+                                                <div class="col-sm-10">
+                                                    <div class="form-line">
+                                                    <input type="text" class="form-control" value  ="{{ $isi->nim }}" name="nim" id="nim" >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="nik" class="col-sm-2 control-label">NIK</label>
+                                                <div class="col-sm-10">
+                                                    <div class="form-line">
+                                                    <input type="text" class="form-control" value  ="{{ $isi->nik }}" name="nik" id="nik" >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="tmp_lahir" class="col-sm-2 control-label">Tempat Lahir</label>
+                                                <div class="col-sm-10">
+                                                    <div class="form-line">
+                                                    <input type="text" class="form-control" value  ="{{ $isi->tmp_lahir }}"name="tmp_lahir" id="tmp_lahir" >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="tgl_lahir" class="col-sm-2 control-label">Tanggal Lahir</label>
+                                                <div class="col-sm-10">
+                                                    <div class="form-line">
+                                                    <input type="date" class="form-control" value  ="{{ $isi->tgl_lahir }}" name="tgl_lahir" id="tgl_lahir" >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="alamat" class="col-sm-2 control-label">Alamat</label>
+                                                <div class="col-sm-10">
+                                                    <div class="form-line">
+                                                    <input type="text" class="form-control" value  ="{{ $isi->alamat }}" name="alamat" id="alamat" >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ayah" class="col-sm-2 control-label">Nama Ayah</label>
+                                                <div class="col-sm-10">
+                                                    <div class="form-line">
+                                                    <input type="text" class="form-control" value  ="{{ $isi->ayah }}" name="ayah" id="ayah" >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ibu" class="col-sm-2 control-label">Nama Ibu</label>
+                                                <div class="col-sm-10">
+                                                    <div class="form-line">
+                                                    <input type="text" class="form-control" value  ="{{ $isi->ibu}}" name="ibu" id="ibu" >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="jeniskelamin" class="col-sm-2 control-label">Jenis Kelamin</label>
+                                                <div class="col-sm-10">
+                                                    <div class="form-line">
+                                                    <input type="text" class="form-control" value  ="{{ $isi->jns_kelamin }}" name="jns_kelamin" id="jeniskelamin" >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="jeniskelamin" class="col-sm-2 control-label">Email</label>
+                                                <div class="col-sm-10">
+                                                    <div class="form-line">
+                                                    <input type="text" class="form-control" value  ="{{ $isi->email }}" name="email" id="email" >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="no_hp" class="col-sm-2 control-label">No Hp</label>
+                                                <div class="col-sm-10">
+                                                    <div class="form-line">
+                                                    <input type="text" class="form-control" value  ="{{ $isi->no_hp }}" name="no_hp" id="no_hp" >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                          
+                                          <div class="form-group">
+                                                
+                                            </div><div class="form-group">
+                                                <div class="col-sm-offset-3 col-sm-9">
+                                                    <button type="submit" class="btn btn-success"><i class="material-icons">save</i>SUBMIT</button>
+                                                </div>
+                                            </div>
+
+                                            @endforeach
                                         </form>
                                     </div>
 

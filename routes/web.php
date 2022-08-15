@@ -1,21 +1,14 @@
 <?php
 
-use App\Models\User;
-use App\Models\Datayudisium;
-use App\Models\Datawisuda;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DatawisudaController;
+use App\Http\Controllers\WisudaController;
 use App\Http\Controllers\IsiyudisiumController;
-use App\Http\Controllers\DatayudisiumController;
-<<<<<<< HEAD
-=======
-use App\Models\User;
-use App\Models\Datayudisium;
->>>>>>> 838d85f56c3c2d18410342f6bc99162718c6d261
+use App\Http\Controllers\YudisiumController;
+use App\Http\Controllers\TracerStudyController;
 
 
 
@@ -34,76 +27,31 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-<<<<<<< HEAD
-Route::get('/dashboard/bukualumni', function (){
-    return view('dashboard.bukualumni',[
-        "judul" => "Buku Alumni"
-    ]);
-});
-=======
-
->>>>>>> 838d85f56c3c2d18410342f6bc99162718c6d261
-
-Route::get('/dashboard/tracerstudy', function(){
-    return view ('dashboard.tracerstudy',[
-        "judul" => "Tracer Study"
-    ]);
-});
-
-Route::get('/dashboard/datayudisium',[DatayudisiumController::class, 'index'])->middleware('auth');
-Route::get('/dashboard/daftaryudisium', [App\Http\Controllers\DatayudisiumController::class, 'index'])->name('datayudisium.index');
-Route::post('/dashboard/daftaryudisium/store', [App\Http\Controllers\DatayudisiumController::class, 'store'])->name('datayudisium.store');
-Route::put('/dashboard/daftaryudisium/{id}/update', [App\Http\Controllers\DatayudisiumController::class, 'update'])->name('datayudisium.update');
-
-
-Route::get('/dashboard/datawisuda',[DatawisudaController::class, 'index'])->middleware('auth');
-Route::get('/dashboard/daftarwisuda', [App\Http\Controllers\DatawisudaController::class, 'index'])->name('datawisuda.index');
-Route::post('/dashboard/daftarwisuda/store', [App\Http\Controllers\DatawisudaController::class, 'store'])->name('datawisuda.store');
-Route::put('/dashboard/daftarwisuda/{id}/update', [App\Http\Controllers\DatawisudaController::class, 'update'])->name('datawisuda.update');
-
-// Route::get('/dashboard/isiyudisium' ,function () {
-//     return view('dashboard.isiyudisium',[
-//         "judul" => "isiyudisium"
-//     ]);
-// });
-// Route::get('/dashboard/daftarwisuda' ,function () {
-//     return view('dashboard.daftarwisuda',[
-//         "judul" => "daftarwisuda"
-//     ]);
-// });
-// Route::get('/dashboard/isiwisuda' ,function () {
-//     return view('dashboard.isiwisuda',[
-//         "judul" => "isiwisuda"
-//     ]);
-// });
-
-
-// Route::get('/dashboard/datayudisium', function(User $user) {
-//     return view('dashboard.datayudisium',[
-//         'judul'=>'Data Yudisium',
-//         'data' => $user->datayudisium,
-//     ]);
-// });
-
-<<<<<<< HEAD
-=======
-// Route::get('/dashboard/datayudisium', function(User $user) {
-//     return view('dashboard.datayudisium',[
-//         'judul'=>'Data Yudisium',
-//         'data' => $user->datayudisium,
-//     ]);
-// });
-
-Route::get('/dashboard/datayudisium',[DatayudisiumController::class, 'index'])->middleware('auth');
->>>>>>> 838d85f56c3c2d18410342f6bc99162718c6d261
-
-Route::get('/dashboard/profil',[ProfilController::class, 'index'])->middleware('auth');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class, 'autentikasi'] ); 
+Route::post('/login', [LoginController::class, 'autentikasi']); 
 Route::post('/logout', [LoginController::class, 'logout'] );   
 
 Route::get('/register',[RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register',[RegisterController::class, 'store']);
 
 Route::get('dashboard', [DashboardController::class, 'index'])->middleware('auth'); 
+Route::get('/profil',[ProfilController::class, 'index'])->middleware('auth');
+Route::put('/profile/{id}',[ProfilController::class, 'update'])->middleware('auth');
+
+Route::get('/yudisium',[YudisiumController::class, 'index'])->middleware('auth');
+Route::post('/yudisium',[YudisiumController::class, 'store'])->middleware('auth');
+Route::put('/yudisium/{id}',[YudisiumController::class, 'update'])->middleware('auth');
+
+Route::get('/yudisium/validation/{id}',[YudisiumController::class, 'validation'])->middleware('auth');
+Route::put('/yudisium/is_valid/{id}/{param}',[YudisiumController::class, 'is_valid'])->middleware('auth');
+
+Route::get('/wisuda',[WisudaController::class, 'index'])->middleware('auth');
+Route::post('/wisuda',[WisudaController::class, 'store'])->middleware('auth');
+Route::put('/wisuda/{id}',[WisudaController::class, 'update'])->middleware('auth');
+
+Route::get('/wisuda/validation/{id}',[WisudaController::class, 'validation'])->middleware('auth');
+Route::put('/wisuda/is_valid/{id}/{param}',[WisudaController::class, 'is_valid'])->middleware('auth');
+
+Route::get('/tracerstudy',[TracerStudyController::class, 'index'])->middleware('auth');
+Route::put('/tracerstudy',[TracerStudyController::class, 'update'])->middleware('auth');

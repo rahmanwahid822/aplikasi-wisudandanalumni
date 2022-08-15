@@ -1,22 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Datawisuda;
+use App\Models\Wisuda;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class DatawisudaController extends Controller
+class WisudaController extends Controller
 {
     public function index()
     {
-        
-
-        $datass = Datawisuda::all();
-
-        return view('dashboard.datawisuda', compact('datass'), [
+        $jenis_file = Wisuda::getJenisFile();
+        $data = [
             'judul' => 'Data Wisuda',
-        ]);
+            'data' =>  $jenis_file
+        ];
+        return view('dashboard.datawisuda', $data);
     }
 
 

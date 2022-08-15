@@ -1,7 +1,9 @@
 @extends('dashboard.layouts.main')
+@section('css')
+    <link href="assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+@endsection
 @section('isikonten')
 
-<<<<<<< HEAD
     <div class="container-fluid">
 
         @if (count($errors) > 0)
@@ -31,410 +33,266 @@
                             DATA KELENGKAPAN FORMULIR YUDISIUM
                             <small>Atas nama <code> {{ auth()->user()->nama }}</code> </small>
                         </h2>
-                        <ul class="header-dropdown m-r--5">
-                            <li class="dropdown">
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <i class="material-icons">more_vert</i>
-                                </a>
-                                <ul class="dropdown-menu pull-right">
-                                    <li><a href="javascript:void(0);">Action</a></li>
-                                    <li><a href="javascript:void(0);">Another action</a></li>
-                                    <li><a href="javascript:void(0);">Something else here</a></li>
-                                </ul>
-                            </li>
-                        </ul>
                     </div>
-                    <div class="body table-responsive">
-                        @if (auth()->user()->datayudisium != null)
-                            <form class="form"
-                                action="{{ route('datayudisium.update', auth()->user()->datayudisium->id) }}" method="POST"
-                                enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th> NO</th>
-                                            <th> URAIAN</th>
-                                            <th> FILE UPLOAD </th>
-                                            <th> STATUS VALIDASI </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Bukti Pengembalian Buku Perpustakaan</td>
-                                            <td><input type="file" class="form-control" name="bukti_perpus" />
-                                                File:
-                                                @if (auth()->user()->datayudisium->bukti_perpus != null)
-                                                    <a href="{{ asset('storage/' . auth()->user()->datayudisium->bukti_perpus) }}"
-                                                        target="_blank">{{ auth()->user()->datayudisium->bukti_perpus }}</a>
-                                                @else
-                                                    Belum ada data
-                                                @endif
-                                            </td>
-                                            <td>Belum Valid</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Bukti Form Revisi</td>
-                                            <td><input type="file" class="form-control" name="bukti_revisi" />
-                                                File:
-                                                @if (auth()->user()->datayudisium->bukti_revisi != null)
-                                                    <a href="{{ asset('storage/' . auth()->user()->datayudisium->bukti_revisi) }}"
-                                                        target="_blank">{{ auth()->user()->datayudisium->bukti_revisi }}</a>
-                                                @else
-                                                    Belum ada data
-                                                @endif
-                                            </td>
-                                            <td>Belum Valid</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Bukti Legalisir Ijazah</td>
-                                            <td><input type="file" class="form-control" name="bukti_legalijazah" />
-                                                File:
-                                                @if (auth()->user()->datayudisium->bukti_legalijazah != null)
-                                                    <a href="{{ asset('storage/' . auth()->user()->datayudisium->bukti_legalijazah) }}"
-                                                        target="_blank">{{ auth()->user()->datayudisium->bukti_legalijazah }}</a>
-                                                @else
-                                                    Belum ada data
-                                                @endif
-                                            </td>
-                                            <td>Belum Valid</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">4</th>
-                                            <td>Bukti Legalisir Kartu Keluarga</td>
-                                            <td>
-                                                <input type="file" class="form-control" name="bukti_legalkk" />
-                                                File:
-                                                @if (auth()->user()->datayudisium->bukti_legalkk != null)
-                                                    <a href="{{ asset('storage/' . auth()->user()->datayudisium->bukti_legalkk) }}"
-                                                        target="_blank">{{ auth()->user()->datayudisium->bukti_legalkk }}</a>
-                                                @else
-                                                    Belum ada data
-                                                @endif
-                                            </td>
-                                            <td>Belum Valid</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">5</th>
-                                            <td>Bukti Akta Kelahiran</td>
-                                            <td><input type="file" class="form-control" name="bukti_akta" />
-                                                File:
-                                                @if (auth()->user()->datayudisium->bukti_akta != null)
-                                                    <a href="{{ asset('storage/' . auth()->user()->datayudisium->bukti_akta) }}"
-                                                        target="_blank">{{ auth()->user()->datayudisium->bukti_akta }}</a>
-                                                @else
-                                                    Belum ada data
-                                                @endif
-                                            </td>
-                                            <td>Belum Valid</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">6</th>
-                                            <td>Bukti KHS smt 1 s/d 5</td>
-                                            <td><input type="file" class="form-control" name="bukti_khs" />
-                                                File:
-                                                @if (auth()->user()->datayudisium->bukti_khs != null)
-                                                    <a href="{{ asset('storage/' . auth()->user()->datayudisium->bukti_khs) }}"
-                                                        target="_blank">{{ auth()->user()->datayudisium->bukti_khs }}</a>
-                                                @else
-                                                    Belum ada data
-                                                @endif
-                                            </td>
-                                            <td>Belum Valid</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">7</th>
-                                            <td>Bukti Pengumpulan Laporan PKN</td>
-                                            <td><input type="file" class="form-control" name="bukti_pkn" />
-                                                File:
-                                                @if (auth()->user()->datayudisium->bukti_pkn != null)
-                                                    <a href="{{ asset('storage/' . auth()->user()->datayudisium->bukti_pkn) }}"
-                                                        target="_blank">{{ auth()->user()->datayudisium->bukti_pkn }}</a>
-                                                @else
-                                                    Belum ada data
-                                                @endif
-                                            </td>
-                                            <td>Belum Valid</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">8</th>
-                                            <td>Bukti Laporan TA</td>
-                                            <td><input type="text" class="form-control" name="bukti_ta"
-                                                    value="{{ auth()->user()->datayudisium->bukti_ta ? auth()->user()->datayudisium->bukti_ta : '' }}"
-                                                    placeholder="Bukti Laporan TA" />
-                                                    File:
-                                                @if (auth()->user()->datayudisium->bukti_ta != null)
-                                                    <a href="http://{{ auth()->user()->datayudisium->bukti_ta ? auth()->user()->datayudisium->bukti_ta : '' }}"
-                                                        target="_blank">{{ auth()->user()->datayudisium->bukti_ta }}</a>
-                                                @else
-                                                    Belum ada data
-                                                @endif
-                                            </td>
-                                            <td>Belum Valid</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">9</th>
-                                            <td>Bukti Link TA</td>
-                                            <td><input type="text" class="form-control"
-                                                    value="{{ auth()->user()->datayudisium->bukti_linkta ? auth()->user()->datayudisium->bukti_linkta : '' }}"
-                                                    name="bukti_linkta" placeholder="Bukti Link TA" />
-                                                    File:
-                                                @if (auth()->user()->datayudisium->bukti_linkta != null)
-                                                    <a href="http://{{ auth()->user()->datayudisium->bukti_linkta ? auth()->user()->datayudisium->bukti_linkta : '' }}"
-                                                        target="_blank">{{ auth()->user()->datayudisium->bukti_linkta }}</a>
-                                                @else
-                                                    Belum ada data
-                                                @endif
-                                            </td>
-                                            <td>Belum Valid</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <button type="submit" class="btn btn-success">Submit</button>
-                            </form>
-                        @else
-                            <form class="form" action="{{ route('datayudisium.store') }}" method="POST"
-                                enctype="multipart/form-data">
-                                @csrf
-                                <table class="table table-bordered">
-                                    Belum ada data
-                                    <br>
-                                    <button class="btn btn-primary">Buat Form Yudisium</button>
-                                </table>
-                            </form>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </section>
-
-    </div>
-@endsection
-=======
-
-<div class="container-fluid">
-            <div class="block-header">
-                <h2>{{ $judul }}</h2>
-            </div>
-              <!-- Bordered Table -->
-              <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                        @foreach($data as $isi)
-                            <h2>
-                                DATA KELENGKAPAN FORMULIR YUDISIUM
-                                <small>Atas nama <code> {{ $isi->user->nama}}</code> </small>
-                            </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="body table-responsive">
-                            <table class="table table-bordered">
+                    <div class="body">
+                        <form class="form"
+                            action = '/yudisium/{{ auth()->user()->id }}' 
+                            {{-- action = '/yudisium'  --}}
+                            method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <table class="table table-responsive table-bordered">
                                 <thead>
                                     <tr>
                                         <th> NO</th>
                                         <th> URAIAN</th>
                                         <th> FILE UPLOAD </th>
                                         <th> STATUS VALIDASI </th>
-                                        <th> AKSI</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                            
-                                
-                                
                                     <tr>
                                         <th scope="row">1</th>
                                         <td>Bukti Pengembalian Buku Perpustakaan</td>
-                             
-                                        <td>{{$isi->bukti_perpus}}</td>
-                                
-                                        <td>Belum Valid</td>
-                                        <td><a href="">Edit</a></td>
+                                        <td><input type="file" class="form-control" name="bukti_perpus" value="tes"/>
+                                            File:
+                                            @if($bukti_perpus)
+                                                <a href="{{ asset('storage/'.$bukti_perpus->file) }}" target="blank" >Lihat File</a> 
+                                            @else
+                                               <span>Data Belum diupload</span> 
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($bukti_perpus)
+                                                @if($bukti_perpus->is_valid == 0)
+                                                    <span class="label label-default">Belum Divalidasi</span>
+                                                @elseif($bukti_perpus->is_valid == 1)
+                                                    <span class="label label-primary">Data Valid</span>
+                                                @else
+                                                    <span class="label label-danger">Data Tidak Valid</span>
+                                                @endif
+                                            @else
+                                               <span class="label label-warning">Data Belum diupload</span> 
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">2</th>
                                         <td>Bukti Form Revisi</td>
-                                        <td><input type="file" class="form-control" placeholder="Username" /></td>
-                                        <td>Belum Valid</td>
-                                        <td><a href="">Edit</a></td>
+                                        <td><input type="file" class="form-control" name="bukti_revisi" />
+                                            File:
+                                            @if($bukti_revisi)
+                                                <a href="{{ asset('storage/'.$bukti_revisi->file) }}" target="blank" >Lihat File</a> 
+                                            @else
+                                               <span>Data Belum diupload</span> 
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($bukti_revisi)
+                                                @if($bukti_revisi->is_valid == 0)
+                                                    <span class="label label-default">Belum Divalidasi</span>
+                                                @elseif($bukti_revisi->is_valid == 1)
+                                                    <span class="label label-primary">Data Valid</span>
+                                                @else
+                                                    <span class="label label-danger">Data Tidak Valid</span>
+                                                @endif
+                                            @else
+                                               <span class="label label-warning">Data Belum diupload</span> 
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">3</th>
                                         <td>Bukti Legalisir Ijazah</td>
-                                        <td><input type="file" class="form-control" placeholder="Username" /></td>
-                                        <td>Belum Valid</td>
-                                        <td><a href="">Edit</a></td>
+                                        <td><input type="file" class="form-control" name="bukti_legalijazah" />
+                                            File:
+                                            @if($bukti_legalijazah)
+                                                <a href="{{ asset('storage/'.$bukti_legalijazah->file) }}" target="blank" >Lihat File</a> 
+                                            @else
+                                               <span>Data Belum diupload</span> 
+                                            @endif                                            
+                                        </td>
+                                        <td>
+                                            @if($bukti_legalijazah)
+                                                @if($bukti_legalijazah->is_valid == 0)
+                                                    <span class="label label-default">Belum Divalidasi</span>
+                                                @elseif($bukti_legalijazah->is_valid == 1)
+                                                    <span class="label label-primary">Data Valid</span>
+                                                @else
+                                                    <span class="label label-danger">Data Tidak Valid</span>
+                                                @endif
+                                            @else
+                                               <span class="label label-warning">Data Belum diupload</span> 
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">4</th>
                                         <td>Bukti Legalisir Kartu Keluarga</td>
-                                        <td><input type="file" class="form-control" placeholder="Username" /></td>
-                                        <td>Belum Valid</td>
-                                        <td><a href="">Edit</a></td>
+                                        <td>
+                                            <input type="file" class="form-control" name="bukti_legalkk" />
+                                            File:
+                                            @if($bukti_legalkk)
+                                                <a href="{{ asset('storage/'.$bukti_legalkk->file) }}" target="blank" >Lihat File</a> 
+                                            @else
+                                               <span>Data Belum diupload</span> 
+                                            @endif                                            
+                                        </td>
+                                        <td>
+                                            @if($bukti_legalkk)
+                                                @if($bukti_legalkk->is_valid == 0)
+                                                    <span class="label label-default">Belum Divalidasi</span>
+                                                @elseif($bukti_legalkk->is_valid == 1)
+                                                    <span class="label label-primary">Data Valid</span>
+                                                @else
+                                                    <span class="label label-danger">Data Tidak Valid</span>
+                                                @endif
+                                            @else
+                                               <span class="label label-warning">Data Belum diupload</span> 
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">5</th>
                                         <td>Bukti Akta Kelahiran</td>
-                                        <td><input type="file" class="form-control" placeholder="Username" /></td>
-                                        <td>Belum Valid</td>
-                                        <td><a href="">Edit</a></td>
+                                        <td><input type="file" class="form-control" name="bukti_akta" />
+                                            File:
+                                            @if($bukti_akta)
+                                                <a href="{{ asset('storage/'.$bukti_akta->file) }}" target="blank" >Lihat File</a> 
+                                            @else
+                                               <span>Data Belum diupload</span> 
+                                            @endif                                            
+                                        </td>
+                                        <td>
+                                            @if($bukti_akta)
+                                                @if($bukti_akta->is_valid == 0)
+                                                    <span class="label label-default">Belum Divalidasi</span>
+                                                @elseif($bukti_akta->is_valid == 1)
+                                                    <span class="label label-primary">Data Valid</span>
+                                                @else
+                                                    <span class="label label-danger">Data Tidak Valid</span>
+                                                @endif
+                                            @else
+                                               <span class="label label-warning">Data Belum diupload</span> 
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">6</th>
                                         <td>Bukti KHS smt 1 s/d 5</td>
-                                        <td><input type="file" class="form-control" placeholder="Username" /></td>
-                                        <td>Belum Valid</td>
-                                        <td><a href="">Edit</a></td>
+                                        <td><input type="file" class="form-control" name="bukti_khs" />
+                                            File:
+                                            @if($bukti_khs)
+                                                <a href="{{ asset('storage/'.$bukti_khs->file) }}" target="blank" >Lihat File</a> 
+                                            @else
+                                               <span>Data Belum diupload</span> 
+                                            @endif                                            
+                                        </td>
+                                        <td>
+                                            @if($bukti_khs)
+                                                @if($bukti_khs->is_valid == 0)
+                                                    <span class="label label-default">Belum Divalidasi</span>
+                                                @elseif($bukti_khs->is_valid == 1)
+                                                    <span class="label label-primary">Data Valid</span>
+                                                @else
+                                                    <span class="label label-danger">Data Tidak Valid</span>
+                                                @endif
+                                            @else
+                                               <span class="label label-warning">Data Belum diupload</span> 
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">7</th>
                                         <td>Bukti Pengumpulan Laporan PKN</td>
-                                        <td><input type="file" class="form-control" placeholder="Username" /></td>
-                                        <td>Belum Valid</td>
-                                        <td><a href="">Edit</a></td>
+                                        <td><input type="file" class="form-control" name="bukti_pkn" />
+                                            File:
+                                            @if($bukti_pkn)
+                                                <a href="{{ asset('storage/'.$bukti_pkn->file) }}" target="blank" >Lihat File</a> 
+                                            @else
+                                               <span>Data Belum diupload</span> 
+                                            @endif                                            
+                                        </td>
+                                        <td>
+                                            @if($bukti_pkn)
+                                                @if($bukti_pkn->is_valid == 0)
+                                                    <span class="label label-default">Belum Divalidasi</span>
+                                                @elseif($bukti_pkn->is_valid == 1)
+                                                    <span class="label label-primary">Data Valid</span>
+                                                @else
+                                                    <span class="label label-danger">Data Tidak Valid</span>
+                                                @endif
+                                            @else
+                                               <span class="label label-warning">Data Belum diupload</span> 
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">8</th>
                                         <td>Bukti Laporan TA</td>
-                                        <td><input type="file" class="form-control" placeholder="Username" /></td>
-                                        <td>Belum Valid</td>
-                                        <td><a href="">Edit</a></td>
+                                        <td>
+                                            <input type="text" class="form-control" name="bukti_ta"
+                                                value=""
+                                                placeholder="Bukti Laporan TA" />
+                                                File:
+                                            @if($bukti_ta)
+                                                <a href="{{ $bukti_ta->file }}" target="blank" >{{ $bukti_ta->file }}</a> 
+                                            @else
+                                               <span>Data Belum diinputkan</span> 
+                                            @endif                                                
+                                        </td>
+                                        <td>
+                                            @if($bukti_ta)
+                                                @if($bukti_ta->is_valid == 0)
+                                                    <span class="label label-default">Belum Divalidasi</span>
+                                                @elseif($bukti_ta->is_valid == 1)
+                                                    <span class="label label-primary">Data Valid</span>
+                                                @else
+                                                    <span class="label label-danger">Data Tidak Valid</span>
+                                                @endif
+                                            @else
+                                               <span class="label label-warning">Data Belum diinputkan</span> 
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">9</th>
                                         <td>Bukti Link TA</td>
-                                        <td><input type="file" class="form-control" placeholder="Username" /></td>
-                                        <td>Belum Valid</td>
-                                        <td><a href="">Edit</a></td>
+                                        <td><input type="text" class="form-control"
+                                                value=""
+                                                name="bukti_linkta" placeholder="Bukti Link TA" />
+                                                File:
+                                            @if($bukti_linkta)
+                                                <a href="{{ $bukti_linkta->file }}" target="blank" >{{ $bukti_linkta->file }}</a> 
+                                            @else
+                                               <span>Data Belum diinputkan</span> 
+                                            @endif                                                
+                                        </td>
+                                        <td>
+                                            @if($bukti_linkta)
+                                                @if($bukti_linkta->is_valid == 0)
+                                                    <span class="label label-default">Belum Divalidasi</span>
+                                                @elseif($bukti_linkta->is_valid == 1)
+                                                    <span class="label label-primary">Data Valid</span>
+                                                @else
+                                                    <span class="label label-danger">Data Tidak Valid</span>
+                                                @endif
+                                            @else
+                                               <span class="label label-warning">Data Belum diinputkan</span> 
+                                            @endif
+                                        </td>
                                     </tr>
-                                    @endforeach
-                                                   </tbody>
+                                </tbody>
                             </table>
-                        </div>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </form>
                     </div>
                 </div>
             </div>
-
-            
-       
-            <!-- Input -->
-            <!-- <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>
-                                ISI KELENGKAPAN DATA YUDISIUM
-                                @foreach($data as $isi)
-                                <small>Nama : {{ $isi -> nama }}</small>
-                                @endforeach
-                            </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="body">
-                            <h2 class="card-inside-title">Foto</h2>
-                            <div class="row clearfix">
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="file" class="form-control" placeholder="Username" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <h2 class="card-inside-title">Basic Examples</h2>
-                            <div class="row clearfix">
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="file" class="form-control" placeholder="Username" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <!-- #END# Input -->
-            <!-- Textarea -->
-            <!-- <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>TEXTAREA</h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="body">
-                            <h2 class="card-inside-title">Basic Example</h2>
-                            <div class="row clearfix">
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <textarea rows="4" class="form-control no-resize" placeholder="Please type what you want..."></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <h2 class="card-inside-title">
-                                Auto Growing Vertical Direction
-                                <small>Taken from <a href="https://github.com/jackmoore/autosize/tree/master" target="_blank">github.com/jackmoore/autosize/tree/master</a></small>
-                            </h2>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <textarea rows="1" class="form-control no-resize auto-growth" placeholder="Please type what you want... And please don't forget the ENTER key press multiple times :)"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <!-- #END# Textarea -->
         </div>
+    </div>
     </section>
 
-        </div>
-
+    </div>
 @endsection
->>>>>>> 838d85f56c3c2d18410342f6bc99162718c6d261
+

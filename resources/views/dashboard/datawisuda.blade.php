@@ -1,4 +1,7 @@
 @extends('dashboard.layouts.main')
+@section('css')
+    <link href="assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+@endsection
 @section('isikonten')
 
     <div class="container-fluid">
@@ -30,183 +33,259 @@
                             DATA KELENGKAPAN FORMULIR WISUDA
                             <small>Atas nama <code> {{ auth()->user()->nama }}</code> </small>
                         </h2>
-                        <ul class="header-dropdown m-r--5">
-                            <li class="dropdown">
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <i class="material-icons">more_vert</i>
-                                </a>
-                                <ul class="dropdown-menu pull-right">
-                                    <li><a href="javascript:void(0);">Action</a></li>
-                                    <li><a href="javascript:void(0);">Another action</a></li>
-                                    <li><a href="javascript:void(0);">Something else here</a></li>
-                                </ul>
-                            </li>
-                        </ul>
                     </div>
-                    <div class="body table-responsive">
-                        @if (auth()->user()->datawisuda != null)
-                            <form class="form"
-                                action="{{ route('datawisuda.update', auth()->user()->datawisuda->id) }}" method="POST"
-                                enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th> NO</th>
-                                            <th> URAIAN</th>
-                                            <th> FILE UPLOAD </th>
-                                            <th> STATUS VALIDASI </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Bukti Pembayaran Biaya Ijazah & Wisuda</td>
-                                            <td><input type="file" class="form-control" name="bukti_lunasijazahwisuda" />
+                    <div class="body">
+                        <form class="form"
+                            action = '/wisuda/{{ auth()->user()->id }}' 
+                            {{-- action = '/wisuda'  --}}
+                            method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <table class="table table-responsive table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th> NO</th>
+                                        <th> URAIAN</th>
+                                        <th> FILE UPLOAD </th>
+                                        <th> STATUS VALIDASI </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Bukti Pembayaran Biaya Ijazah & Wisuda</td>
+                                        <td><input type="file" class="form-control" name="bukti_lunasijazahwisuda" value="tes"/>
+                                            File:
+                                            @if($bukti_lunasijazahwisuda)
+                                                <a href="{{ asset('storage/'.$bukti_lunasijazahwisuda->file) }}" target="blank" >Lihat File</a> 
+                                            @else
+                                               <span>Data Belum diupload</span> 
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($bukti_lunasijazahwisuda)
+                                                @if($bukti_lunasijazahwisuda->is_valid == 0)
+                                                    <span class="label label-default">Belum Divalidasi</span>
+                                                @elseif($bukti_lunasijazahwisuda->is_valid == 1)
+                                                    <span class="label label-primary">Data Valid</span>
+                                                @else
+                                                    <span class="label label-danger">Data Tidak Valid</span>
+                                                @endif
+                                            @else
+                                               <span class="label label-warning">Data Belum diupload</span> 
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Bukti Pembayaran Biaya Perpustakaan</td>
+                                        <td><input type="file" class="form-control" name="bukti_pembayaranperpus" />
+                                            File:
+                                            @if($bukti_pembayaranperpus)
+                                                <a href="{{ asset('storage/'.$bukti_pembayaranperpus->file) }}" target="blank" >Lihat File</a> 
+                                            @else
+                                               <span>Data Belum diupload</span> 
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($bukti_pembayaranperpus)
+                                                @if($bukti_pembayaranperpus->is_valid == 0)
+                                                    <span class="label label-default">Belum Divalidasi</span>
+                                                @elseif($bukti_pembayaranperpus->is_valid == 1)
+                                                    <span class="label label-primary">Data Valid</span>
+                                                @else
+                                                    <span class="label label-danger">Data Tidak Valid</span>
+                                                @endif
+                                            @else
+                                               <span class="label label-warning">Data Belum diupload</span> 
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Sumbangan Alumni</td>
+                                        <td><input type="file" class="form-control" name="bukti_sumbanganalumni" />
+                                            File:
+                                            @if($bukti_sumbanganalumni)
+                                                <a href="{{ asset('storage/'.$bukti_sumbanganalumni->file) }}" target="blank" >Lihat File</a> 
+                                            @else
+                                               <span>Data Belum diupload</span> 
+                                            @endif                                            
+                                        </td>
+                                        <td>
+                                            @if($bukti_sumbanganalumni)
+                                                @if($bukti_sumbanganalumni->is_valid == 0)
+                                                    <span class="label label-default">Belum Divalidasi</span>
+                                                @elseif($bukti_sumbanganalumni->is_valid == 1)
+                                                    <span class="label label-primary">Data Valid</span>
+                                                @else
+                                                    <span class="label label-danger">Data Tidak Valid</span>
+                                                @endif
+                                            @else
+                                               <span class="label label-warning">Data Belum diupload</span> 
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>Bukti Pas Foto 3x4</td>
+                                        <td>
+                                            <input type="file" class="form-control" name="bukti_fototigaempat" />
+                                            File:
+                                            @if($bukti_fototigaempat)
+                                                <a href="{{ asset('storage/'.$bukti_fototigaempat->file) }}" target="blank" >Lihat File</a> 
+                                            @else
+                                               <span>Data Belum diupload</span> 
+                                            @endif                                            
+                                        </td>
+                                        <td>
+                                            @if($bukti_fototigaempat)
+                                                @if($bukti_fototigaempat->is_valid == 0)
+                                                    <span class="label label-default">Belum Divalidasi</span>
+                                                @elseif($bukti_fototigaempat->is_valid == 1)
+                                                    <span class="label label-primary">Data Valid</span>
+                                                @else
+                                                    <span class="label label-danger">Data Tidak Valid</span>
+                                                @endif
+                                            @else
+                                               <span class="label label-warning">Data Belum diupload</span> 
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">5</th>
+                                        <td>Bukti Pas Foto 2x3</td>
+                                        <td><input type="file" class="form-control" name="bukti_fotoduatiga" />
+                                            File:
+                                            @if($bukti_fotoduatiga)
+                                                <a href="{{ asset('storage/'.$bukti_fotoduatiga->file) }}" target="blank" >Lihat File</a> 
+                                            @else
+                                               <span>Data Belum diupload</span> 
+                                            @endif                                            
+                                        </td>
+                                        <td>
+                                            @if($bukti_fotoduatiga)
+                                                @if($bukti_fotoduatiga->is_valid == 0)
+                                                    <span class="label label-default">Belum Divalidasi</span>
+                                                @elseif($bukti_fotoduatiga->is_valid == 1)
+                                                    <span class="label label-primary">Data Valid</span>
+                                                @else
+                                                    <span class="label label-danger">Data Tidak Valid</span>
+                                                @endif
+                                            @else
+                                               <span class="label label-warning">Data Belum diupload</span> 
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>Bukti Pas Foto 4x6</td>
+                                        <td><input type="file" class="form-control" name="bukti_empatenam" />
+                                            File:
+                                            @if($bukti_empatenam)
+                                                <a href="{{ asset('storage/'.$bukti_empatenam->file) }}" target="blank" >Lihat File</a> 
+                                            @else
+                                               <span>Data Belum diupload</span> 
+                                            @endif                                            
+                                        </td>
+                                        <td>
+                                            @if($bukti_empatenam)
+                                                @if($bukti_empatenam->is_valid == 0)
+                                                    <span class="label label-default">Belum Divalidasi</span>
+                                                @elseif($bukti_empatenam->is_valid == 1)
+                                                    <span class="label label-primary">Data Valid</span>
+                                                @else
+                                                    <span class="label label-danger">Data Tidak Valid</span>
+                                                @endif
+                                            @else
+                                               <span class="label label-warning">Data Belum diupload</span> 
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">7</th>
+                                        <td>Bukti Pengumpulan Laporan TA</td>
+                                        <td><input type="file" class="form-control" name="bukti_laporanta" />
+                                            File:
+                                            @if($bukti_laporanta)
+                                                <a href="{{ asset('storage/'.$bukti_laporanta->file) }}" target="blank" >Lihat File</a> 
+                                            @else
+                                               <span>Data Belum diupload</span> 
+                                            @endif                                            
+                                        </td>
+                                        <td>
+                                            @if($bukti_laporanta)
+                                                @if($bukti_laporanta->is_valid == 0)
+                                                    <span class="label label-default">Belum Divalidasi</span>
+                                                @elseif($bukti_laporanta->is_valid == 1)
+                                                    <span class="label label-primary">Data Valid</span>
+                                                @else
+                                                    <span class="label label-danger">Data Tidak Valid</span>
+                                                @endif
+                                            @else
+                                               <span class="label label-warning">Data Belum diupload</span> 
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">8</th>
+                                        <td>Bukti Laporan PKN</td>
+                                        <td>
+                                            <input type="text" class="form-control" name="bukti_laporanpkn"
+                                                value=""
+                                                placeholder="Bukti Laporan TA" />
                                                 File:
-                                                @if (auth()->user()->datawisuda->bukti_lunasijazahwisuda != null)
-                                                    <a href="{{ asset('storage/' . auth()->user()->datawisuda->bukti_lunasijazahwisuda) }}"
-                                                        target="_blank">{{ auth()->user()->datawisuda->bukti_lunasijazahwisuda }}</a>
+                                            @if($bukti_laporanpkn)
+                                                <a href="{{ $bukti_laporanpkn->file }}" target="blank" >{{ $bukti_laporanpkn->file}}</a> 
+                                            @else
+                                               <span>Data Belum diinputkan</span> 
+                                            @endif                                                
+                                        </td>
+                                        <td>
+                                            @if($bukti_laporanpkn)
+                                                @if($bukti_laporanpkn->is_valid == 0)
+                                                    <span class="label label-default">Belum Divalidasi</span>
+                                                @elseif($bukti_laporanpkn->is_valid == 1)
+                                                    <span class="label label-primary">Data Valid</span>
                                                 @else
-                                                    Belum ada data
+                                                    <span class="label label-danger">Data Tidak Valid</span>
                                                 @endif
-                                            </td>
-                                            <td>Belum Valid</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Bukti Pembayaran Biaya Perpustakaan</td>
-                                            <td><input type="file" class="form-control" name="bukti_pembayaranperpus" />
+                                            @else
+                                               <span class="label label-warning">Data Belum diinputkan</span> 
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">9</th>
+                                        <td>Bukti Link TA</td>
+                                        <td><input type="text" class="form-control"
+                                                value=""
+                                                name="bukti_linkta" placeholder="Bukti Link TA" />
                                                 File:
-                                                @if (auth()->user()->datawisuda->bukti_pembayaranperpus != null)
-                                                    <a href="{{ asset('storage/' . auth()->user()->datawisuda->bukti_pembayaranperpus) }}"
-                                                        target="_blank">{{ auth()->user()->datawisuda->bukti_pembayaranperpus }}</a>
+                                            @if($bukti_linkta)
+                                                <a href="{{ $bukti_linkta->file }}" target="blank" >{{ $bukti_linkta->file }}</a> 
+                                            @else
+                                               <span>Data Belum diinputkan</span> 
+                                            @endif                                                
+                                        </td>
+                                        <td>
+                                            @if($bukti_linkta)
+                                                @if($bukti_linkta->is_valid == 0)
+                                                    <span class="label label-default">Belum Divalidasi</span>
+                                                @elseif($bukti_linkta->is_valid == 1)
+                                                    <span class="label label-primary">Data Valid</span>
                                                 @else
-                                                    Belum ada data
+                                                    <span class="label label-danger">Data Tidak Valid</span>
                                                 @endif
-                                            </td>
-                                            <td>Belum Valid</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Sumbangan Alumni</td>
-                                            <td><input type="file" class="form-control" name="bukti_sumbanganalumni" />
-                                                File:
-                                                @if (auth()->user()->datawisuda->bukti_sumbanganalumni != null)
-                                                    <a href="{{ asset('storage/' . auth()->user()->datawisuda->bukti_sumbanganalumni) }}"
-                                                        target="_blank">{{ auth()->user()->datawisuda->bukti_sumbanganalumni }}</a>
-                                                @else
-                                                    Belum ada data
-                                                @endif
-                                            </td>
-                                            <td>Belum Valid</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">4</th>
-                                            <td>Bukti Pas Foto 3x4</td>
-                                            <td>
-                                                <input type="file" class="form-control" name="bukti_fototigaempat" />
-                                                File:
-                                                @if (auth()->user()->datawisuda->bukti_fototigaempat != null)
-                                                    <a href="{{ asset('storage/' . auth()->user()->datawisuda->bukti_fototigaempat) }}"
-                                                        target="_blank">{{ auth()->user()->datawisuda->bukti_fototigaempat }}</a>
-                                                @else
-                                                    Belum ada data
-                                                @endif
-                                            </td>
-                                            <td>Belum Valid</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">5</th>
-                                            <td>Bukti Pas Foto 2x3</td>
-                                            <td><input type="file" class="form-control" name="bukti_fotoduatiga" />
-                                                File:
-                                                @if (auth()->user()->datawisuda->bukti_fotoduatiga != null)
-                                                    <a href="{{ asset('storage/' . auth()->user()->datawisuda->bukti_fotoduatiga) }}"
-                                                        target="_blank">{{ auth()->user()->datawisuda->bukti_fotoduatiga }}</a>
-                                                @else
-                                                    Belum ada data
-                                                @endif
-                                            </td>
-                                            <td>Belum Valid</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">6</th>
-                                            <td>Bukti Pas Foto 4x6</td>
-                                            <td><input type="file" class="form-control" name="bukti_empatenam" />
-                                                File:
-                                                @if (auth()->user()->datawisuda->bukti_empatenam != null)
-                                                    <a href="{{ asset('storage/' . auth()->user()->datawisuda->bukti_empatenam) }}"
-                                                        target="_blank">{{ auth()->user()->datawisuda->bukti_empatenam }}</a>
-                                                @else
-                                                    Belum ada data
-                                                @endif
-                                            </td>
-                                            <td>Belum Valid</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">7</th>
-                                            <td>Bukti Pengumpulan Laporan TA</td>
-                                            <td><input type="file" class="form-control" name="bukti_laporanta" />
-                                                File:
-                                                @if (auth()->user()->datawisuda->bukti_laporanta != null)
-                                                    <a href="{{ asset('storage/' . auth()->user()->datawisuda->bukti_laporanta) }}"
-                                                        target="_blank">{{ auth()->user()->datawisuda->bukti_laporanta }}</a>
-                                                @else
-                                                    Belum ada data
-                                                @endif
-                                            </td>
-                                            <td>Belum Valid</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">8</th>
-                                            <td>Bukti Laporan PKN</td>
-                                            <td><input type="text" class="form-control" name="bukti_laporanpkn"
-                                                    value="{{ auth()->user()->datawisuda->bukti_laporanpkn ? auth()->user()->datawisuda->bukti_laporanpkn : '' }}"
-                                                    placeholder="Bukti Laporan PKN" />
-                                                    File:
-                                                @if (auth()->user()->datawisuda->bukti_laporanpkn != null)
-                                                    <a href="http://{{ auth()->user()->datawisuda->bukti_laporanpkn ? auth()->user()->datawisuda->bukti_laporanpkn : '' }}"
-                                                        target="_blank">{{ auth()->user()->datawisuda->bukti_laporanpkn }}</a>
-                                                @else
-                                                    Belum ada data
-                                                @endif
-                                            </td>
-                                            <td>Belum Valid</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">9</th>
-                                            <td>Bukti Link TA</td>
-                                            <td><input type="text" class="form-control"
-                                                    value="{{ auth()->user()->datawisuda->bukti_linkta ? auth()->user()->datawisuda->bukti_linkta : '' }}"
-                                                    name="bukti_linkta" placeholder="Bukti Link TA" />
-                                                    File:
-                                                @if (auth()->user()->datawisuda->bukti_linkta != null)
-                                                    <a href="http://{{ auth()->user()->datawisuda->bukti_linkta ? auth()->user()->datawisuda->bukti_linkta : '' }}"
-                                                        target="_blank">{{ auth()->user()->datawisuda->bukti_linkta }}</a>
-                                                @else
-                                                    Belum ada data
-                                                @endif
-                                            </td>
-                                            <td>Belum Valid</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <button type="submit" class="btn btn-success">Submit</button>
-                            </form>
-                        @else
-                            <form class="form" action="{{ route('datawisuda.store') }}" method="POST"
-                                enctype="multipart/form-data">
-                                @csrf
-                                <table class="table table-bordered">
-                                    Belum ada data
-                                    <br>
-                                    <button class="btn btn-primary">Buat Form Wisuda</button>
-                                </table>
-                            </form>
-                        @endif
+                                            @else
+                                               <span class="label label-warning">Data Belum diinputkan</span> 
+                                            @endif
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -216,3 +295,4 @@
 
     </div>
 @endsection
+
